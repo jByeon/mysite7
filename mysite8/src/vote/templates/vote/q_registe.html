@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+	{# rendered : form 태그에 집어넣을 문자열 형태의 input 태그들 #}
+	
+	<h3>설문조사 생성 페이지</h3>
+	
+	<!-- 
+	action 속성에 아무런 문자열도 입력하지 않으면, 사용자가 해당 페이지를 요청했을 때의 인터넷 주소로 데이터를 전송하게됨
+		ex) 127.0.0.1:8000/vote/2에서 form을 전송하면, 127.0.0.1:8000/vote/2 주소로 데이터를 송신하게 됨
+	 -->
+	<form action = '' method = 'post'>
+		{% csrf_token %}
+		{{ rendered }}
+		<input type = 'submit' value = '설문조사 등록'/>
+	</form>
+	
+	<a href = "{% url 'main' %}">메인페이지로 돌아가기</a>
+
+
+
+{% endblock %}

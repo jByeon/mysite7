@@ -1,0 +1,39 @@
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>메인 용 페이지</title>
+</head>
+<body>
+-->
+{% extends 'base.html' %}
+{% block content %}
+
+	{# q : Quesiton 객체를 저장하고 있는 리스트 #}
+	<ul>
+		<li> 설문지 제목과 생성일 </li>
+		{% for obj in q %}
+		<li>
+			<!-- 사이트 주소를 저장하는 href속성이 /로 시작하면 자신의 도메인 주소를 자동으로 설정함 -->
+			<a href='/vote/{{obj.id}}/'> 
+				{# q에 저장된 Question 객체를 한개씩 추출해 객체가 저장한 변수를 화면에 출력 #}
+				{{obj.title}} - {{obj.pub_date}}
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+	
+	
+	
+	<a href = "{% url 'qr' %}">새로운 설문조사 추가하기</a>
+	<br>
+	<a href = "{% url 'cr' %}">새로운 선택항목 추가하기</a>
+
+
+{% endblock %}
+
+<!-- 
+</body>
+</html>
+-->

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+{# qwer : ul로 묶인 input 태그 #}
+{# q_id : Question 객체 id #}
+{# detail_url : detail페이지의 주소 #}
+
+	<h3>선택항목 수정 페이지</h3>
+	
+	<form action='' method='post'>
+		{%csrf_token%}
+
+		<ul>
+			{{qwer}}
+		</ul>
+		<input type='submit' value='수정'/>
+			
+	</form>
+	
+	<a href="{% url 'main' %}">메인으로 돌아가기</a>
+	<br>
+	<a href="{% url 'detail' q_id %}">이전으로 돌아가기</a>
+	<br>
+	<a href="{{ detail_url }}">설문조사페이지로 돌아가기</a>
+
+
+
+{% endblock %}

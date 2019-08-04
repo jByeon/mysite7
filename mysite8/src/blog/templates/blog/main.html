@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	<!-- 이전페이지 버튼, 다음페이지 버튼 -->
+	<!-- ListView 클래스가 HTML파일에게 페이지정보를 접근할 수 있는 변수인 page_obj변수를 내부적으로 전달함 -->
+	{% if page_obj.has_previous %}
+		<!-- 
+		ListView는 사용자가 몇 번째 페이지를 요청했는지를 page변수값으로 확인. 
+		이전페이지나 다음페이지로 이동할 링크를 만들 때에도 page변수에 값을 대입하면 됨
+			page_obj.has_previous, has_next : 이전페이지, 다음페이지 존재 여부 확인 함수
+			page_obj.previous_page_number, next_page_number : 현재 클라이언트가 요청한 페이지를 기준으로, 이전페이지와 다음페이지 값이 저장된 변수 
+		-->
+		<a href = '?page={{page_obj.previous_page_number}}'>이전페이지</a>
+	{% else %}
+		<a>이전페이지</a>
+	{% endif %}
+	
+	{% if page_obj.has_next %}
+		<a href = '?page={{page_obj.next_page_number}}'>다음페이지</a>
+	{% else %}
+		<a>다음페이지</a>
+	{% endif %}
+	
+	<!-- 글 목록 -->
+	<table width=100%>
+		<tr>
+			<th>글번호</th>
+			<th>카테고리</th>
+			<th>글제목</th>
+			<th>작성자</th>
+			<th>생성일</th>
+		</tr>
+		
+		{# views.py가 넘겨준 list변수의 요소를 하나씩 추출하여 출력 #}
+		{% for post in list %}
+			<tr>
+				<th>{{post.id}}</th>
+				<th>{{post.category}}</th>
+				<th>
+					<a href = "{% url 'blog:detail' post.id %}">
+						{{post.title}}
+					</a>
+				</th>
+				<th>{{post.user}}</th>
+				<th>{{post.pub_date}}</th>
+			</tr>
+		{% endfor %}
+	
+	</table>
+
+	<!-- 글쓰기 링크 -->
+	<a href="{% url 'blog:posting' %}">글쓰기</a>
+
+{% endblock %}

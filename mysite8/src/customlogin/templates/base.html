@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>나만의홈페이지</title>
+</head>
+<body>
+
+<!-- 로그인 여부, 메뉴 바 -->
+	<!-- 
+	뷰 함수의 request 매개변수에 있는 여러 변수들을 템플릿 엔진도 사용할 수 있도록 내부적으로 값을 전달함 
+	user.is_authenticated : 웹 클라이언트의 로그인 여부를 파악하는 함수
+	-->
+	{% if user.is_authenticated %}
+		<p>
+			{{user.last_name}} {{user.first_name}}님 환영합니다!
+			<a href="{% url 'cl:signout' %}">로그아웃</a>
+		</p>
+	{% else %}
+		<p>
+			<a href="{% url 'cl:signin' %}">로그인</a>
+			<a href="{% url 'cl:signup' %}">회원가입</a>
+		</p>
+	{% endif %}
+	
+	<a href="{% url 'main' %}">설문조사</a>
+	<a href="{% url 'blog:main' %}">블로그</a>
+	
+	<hr>
+	
+<!--  본문위치 -->
+	<!-- 
+	block 블록이름 ~ endblock : 템플릿 엔진의 태그로써 다른 html(css, js)파일이 해당 html파일을 확장할 때 수정할 수 있는 영역을 지정하는 태그
+	겹치지 않도록!
+	-->	
+	{% block content %}
+	
+	{% endblock %}	
+	
+	<hr>
+	
+<!--  홈페이지 소개 -->
+
+	<p>전화번호 123-4567-8900</p>
+	
+</body>
+</html>

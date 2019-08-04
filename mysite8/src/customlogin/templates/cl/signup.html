@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+{# result : input태그 문자열 #}
+	<h3>회원가입 페이지</h3>
+	
+	<form action='' method='post'>
+		{% csrf_token %}
+		
+		<table>
+			{{result}}
+		</table>
+		
+		<input type='submit' value='회원가입'>
+		
+	</form>
+
+{% endblock %}

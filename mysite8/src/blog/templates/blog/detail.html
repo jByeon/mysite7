@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	{# obj : Post 객체 한개 #}
+	
+	<h3>[ {{obj.category}} ] {{obj.title}}</h3>
+	<h3>작성자 : {{obj.user}}</h3>
+	<h4>{{obj.pub_date}}</h4>
+	
+	<!-- pre태그 : 해당 태그 안에 작성된 내용은 여러개의 공백, 엔터가 한줄로 인식되지 않고 화면에 그대로 출력되는 태그 -->
+	<pre>{{obj.contents}}</pre>
+	
+	<!-- 첨부파일 다운로드 링크 -->
+		<!-- 
+		obj.postfile_set.all : obj라는 Post객체와 연결된 모든 PostFile 객체 추출하는 함수.
+		함수지만 매개변수 수정 못하도록 소괄호 생략함 
+		-->
+	{% for pf in obj.postfile_set.all %}
+		<!-- 파일필드변수.url : 해당 파일을 접근하기 위함 url 주소를 저장한 변수 -->
+		<a download href = '{{pf.file.url}}'>첨부파일</a>
+		<br>
+	{% endfor %}
+	
+	<!-- 이미지 파일 출력 -->
+	{% for pi in obj.postimage_set.all %}
+		<!-- 
+		img태그 : html 화면에 이미지를 출력할 때 사용하는 태그.(src 속성 필수)
+		src속성에 띄울 이미지의 경로를 지정해야함(하드디스크경로나 인터넷경로)
+		-->
+		<img src='{{pi.image.url}}' width=40%>
+		<br>
+	{% endfor %}
+	
+	<!-- 작성자에 한해 삭제버튼 제공 -->
+		<!--
+		obj.user : view에서 넘겨받은 post 객체가 저장한 user값
+		user : request.user를 의미 
+		-->
+	{% if obj.user == user %}
+		<a href="{% url 'blog:delete' obj.id %}">삭제</a>
+	{% endif %}
+	<br>
+	<a href = "{% url 'blog:main' %}">메인으로 돌아가기</a>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+{# c : 삭제대상 #}
+
+	<h3>선택항목 삭제 페이지</h3>
+	
+	<p>{{c.q.title}}의 {{c.name}}을(를) 삭제하시겠습니까?</p>
+	<form action='' method='post'>
+		{% csrf_token %}
+		<input type='submit' value='삭제'/>
+	</form>
+	<a href="{% url 'main' %}">메인으로</a>
+	<hr/>
+	<a href="{% url 'detail' c.q.id %}">이전으로</a>
+
+
+
+{% endblock %}

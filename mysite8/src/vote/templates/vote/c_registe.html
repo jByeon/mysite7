@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+	{# asdf : 문자열 형태의 input #}
+	
+	<h3>선택항목 추가</h3>
+	
+	<form action="" method='post'>
+		{% csrf_token %}
+		
+		{{ asdf }}
+		
+		<input type = 'submit' value = '답변 추가'>
+	</form>
+	
+	{#<a href = "{% url 'detail' new_c.q.id %}">추가된 항목으로 돌아가기</a>#}
+	<a href = "{% url 'main' %}">메인페이지로 돌아가</a>
+
+
+{% endblock %}

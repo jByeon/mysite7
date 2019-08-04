@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+{# q : Question 객체 한개, c : q와 연결된 Choice 객체들 #}
+<!-- 
+<form> : 웹 클라이언트가 입력한 데이터를 웹 서버에 보내는 태그.
+	action='' : 전송받을 사이트
+	method='' : get 혹은 post
+<input> : 웹 클라이언트가 입력하는 공간을 생성할 때 사용하는 태그.
+	type='' : 입력할 수 있는 형식 설정
+	name='' : 어떤 변수로 서버에 전송할지
+	value='' : 서버에 전송될 변수값
+ -->
+	<h2> {{q.title}} / {{q.pub_date}} </h2>
+	<form action='/vote/vote/' method='post'>
+		<!-- 
+		csrf : 도메인 주소가 다른 form에서 웹서버로 데이터를 전송하는 공격 
+		ex) 다른 사이트가 네이버 결제주소로 데이터를 전송해 결제가 이뤄지는것
+		django 프레임워크는 csrf공격을 막기 위해 form태그에 csrf_token을 생상해야함
+		-->
+		{% csrf_token %}
+		<table>
+			{% for obj in c %}
+			<tr>
+				<!-- type='radio' : 하나의 폼에 동일한 name값을 가진 항목 중 한개만 선택할 수 있도록 설정하는 input 타입 -->
+				<td> <input type='radio' name='select' value='{{obj.id}}'> </td>
+				<td> {{obj.name}} </td>
+				<td> <a href="{% url 'cu' obj.id %}">수정</a> </td>
+				<td> <a href="{% url 'cd' obj.id %}">삭제</a> </td>
+			</tr>
+			{% endfor %}
+		</table>
+		<input type='submit', value='투표하기'>
+	</form>
+	
+	<a href="{% url 'qu' q.id %}">수정하기</a>
+	<br>
+	<a href="{% url 'qd' q.id %}">삭제하기</a>
+
+
+{% endblock %}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>테스트_밸류 용 페이지</title>
+</head>
+<body>
+{# 파이썬 주석을 HTML코드에 넣을 때 사용하는 표시 #}
+{# {{변수, 함수}} : 변수나 함수의 반환값을 HTML에 포함시킬 때 사용 #}
+{# {% 템플릿 태그 %} : 특정 태그를 바탕으로 연산을 할 때 사용 #}
+{# view함수가 넘겨준 dict데이터의 Key:Value는 템플릿에서 Key는 변수로써 사용되고, 변수를 호출하면 저장된 Value가 출력됨 #}
+<!-- HTML코드상의 주석입니다 -->
+	<p> a 변수에 들어있는 값: {{a}} </p>
+	<p> b 변수에 들어있는 값 출력 </p>
+	{{b}}
+	<ol>
+		<li>고정적으로 출력되는 요소</li>
+		{% for c in b %}
+			<li> {{c}} </li>
+		{% endfor %}
+		
+	</ol>
+</body>
+</html>

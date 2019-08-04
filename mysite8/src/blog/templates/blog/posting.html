@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	{# form : 제네릭뷰가 넘겨준 폼 객체(views.py에서 PostingForm을 생성하여 HTML로 넘겨줌) #}
+	{# form.as_p, as_ul, as_table 함수로 HTML코드 변환 및 출력 #}
+	
+	<h3>글 작성 페이지</h3>
+	
+	<!-- 웹클라이언트가 서버에게 파일정보를 업로드하려면 form태그의 enctype 속성에 'multipart/form-data'값을 저장해야 함 -->
+	
+	<form action='' method='post' enctype='multipart/form-data'>
+		
+		{% csrf_token %}
+		
+		<table width=50%>
+			{{form.as_table}}
+		</table>
+		
+		<input type='submit' value='갱신'>
+	
+	</form>
+	
+{% endblock %}
